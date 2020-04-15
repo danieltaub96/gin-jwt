@@ -29,3 +29,7 @@ gin-bin
 coverage.txt
 vendor/*
 !vendor/vendor.json
+
+# ide's
+.idea
+.vscode
