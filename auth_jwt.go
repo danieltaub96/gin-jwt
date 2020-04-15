@@ -128,6 +128,9 @@ type GinJWTMiddleware struct {
 
 	// CookieName allow cookie name change for development
 	CookieName string
+
+	// CookieSameSite allow use http.SameSite cookie param
+	CookieSameSite http.SameSite
 }
 
 var (
@@ -454,8 +457,14 @@ func (mw *GinJWTMiddleware) LoginHandler(c *gin.Context) {
 	// set cookie
 	if mw.SendCookie {
 		maxage := int(expire.Unix() - time.Now().Unix())
+
+		if mw.CookieSameSite != 0 {
+			c.SetSameSite(mw.CookieSameSite)
+		}
+
 		c.SetCookie(
 			mw.CookieName,
+
 			tokenString,
 			maxage,
 			"/",
@@ -472,6 +481,10 @@ func (mw *GinJWTMiddleware) LoginHandler(c *gin.Context) {
 func (mw *GinJWTMiddleware) LogoutHandler(c *gin.Context) {
 	// delete auth cookie
 	if mw.SendCookie {
+		if mw.CookieSameSite != 0 {
+			c.SetSameSite(mw.CookieSameSite)
+		}
+
 		c.SetCookie(
 			mw.CookieName,
 			"",
@@ -536,6 +549,10 @@ func (mw *GinJWTMiddleware) RefreshToken(c *gin.Context) (string, time.Time, err
 
 	// set cookie
 	if mw.SendCookie {
+		if mw.CookieSameSite != 0 {
+			c.SetSameSite(mw.CookieSameSite)
+		}
+
 		maxage := int(expire.Unix() - time.Now().Unix())
 		c.SetCookie(
 			mw.CookieName,

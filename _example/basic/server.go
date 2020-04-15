@@ -51,6 +51,9 @@ func main() {
 		Timeout:     time.Hour,
 		MaxRefresh:  time.Hour,
 		IdentityKey: identityKey,
+		SendCookie:  true,
+		//CookieSameSite: http.SameSiteNoneMode,
+		//CookieSameSite: http.SameSiteNoneMode,
 		PayloadFunc: func(data interface{}) jwt.MapClaims {
 			if v, ok := data.(*User); ok {
 				return jwt.MapClaims{
