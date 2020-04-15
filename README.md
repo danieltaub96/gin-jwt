@@ -18,13 +18,13 @@ Download and install using [go module](https://blog.golang.org/using-go-modules)
 
 ```sh
 export GO111MODULE=on
-go get github.com/appleboy/gin-jwt/v2
+go get github.com/danieltaub96/gin-jwt/v2
 ```
 
 Import it in your code:
 
 ```go
-import "github.com/appleboy/gin-jwt/v2"
+import "github.com/danieltaub96/gin-jwt/v2"
 ```
 
 Download and install without using [go module](https://blog.golang.org/using-go-modules):
@@ -53,7 +53,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/appleboy/gin-jwt/v2"
+	"github.com/danieltaub96/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 )
 
